@@ -1,0 +1,32 @@
+﻿
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="/css/admin-styles.css">
+</head>
+<body>
+<div class="container-custom">
+    <!-- Sidebar (Menu) -->
+    <div class="sidebar" id="sidebar">
+            <a href="@Url.Action("MovieStatistics", "AdminGenres")"><i class="fas fa-home"></i> Trang chủ</a>
+            <a href="@Url.Action("Index", "AdminMovies")"><i class="fas fa-film"></i> Phim</a>
+            <a href="@Url.Action("Index", "AdminGenres")"><i class="fas fa-list-alt"></i> Thể loại</a>
+    </div>
+    <!-- Main Content -->
+    <div class="content" id="main-content">
+        <span id="menu-toggle" onclick="toggleSidebar()">&#9776;</span>
+        <main>
+            @RenderBody()
+        </main>
+    </div>
+</div>
+<script src="~/js/admin.js"></script>
+<script src="~/js/movie.js"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+

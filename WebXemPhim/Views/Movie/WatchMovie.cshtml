@@ -1,0 +1,74 @@
+﻿@model WebXemPhim.Models.MovieViewModel
+@{
+    ViewBag.Title = "Xem Phim";
+    Layout = "_UserLayout";
+}
+
+        <div class="video-frame">
+            <iframe src="@Model.Directory" class="video-item" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="right">
+        <div class="rating">
+            @for (int i = 1; i <= 5; i++)
+            {
+                <span class="star @(i <= ViewBag.UserRating ? "selected" : "")" onclick="rateMovie(@(i))"><i class="fas fa-star"></i></span>
+            }
+           
+        </div>
+        <span id="favorite-icon" class="@(ViewBag.IsFavorite ? "fas" : "far") fa-heart" onclick="toggleFavorite()"></span>
+        </div>
+        <div class="movie-details">
+            <h2 class="movie-details-title">@Model.Title</h2>
+            <p><strong>Nội dung:</strong> @Model.Content</p>
+            <p><strong>Ngày phát hành:</strong> @Model.ReleaseDay?.ToString("dd/MM/yyyy")</p>
+            <p><strong>Đạo diễn:</strong> @Model.DirectorName</p>
+            <p><strong>Quốc gia:</strong> @Model.CountryName</p>
+            <p><strong>Thể loại:</strong> @Model.GenreName</p>
+            <p><strong>Diễn viên:</strong></p>
+            <ul>
+                @foreach (var actor in ViewBag.Actors)
+                {
+                    <li>@actor</li>
+                }
+            </ul>
+            <p><strong>Lượt thích:</strong> @Model.LikeCount</p>
+            <p><strong>Lượt xem:</strong> @Model.ViewCount</p>
+        </div>
+
+            <script>
+    function rateMovie(rating) {
+        var movieId = @Model.MovieId;
+        $.ajax({
+            type: "POST",
+            url: "/Movie/RateMovie",
+            data: { movieId: movieId, rating: rating },
+            success: function () {
+                var stars = $('.star');
+                var selectedRating = parseInt(rating);
+                stars.removeClass('selected');
+                for (var i = 0; i < selectedRating; i++) {
+                    $(stars[i]).addClass('selected');
+                }
+            },
+            error: function () {
+            }
+        });
+    }
+    function toggleFavorite() {
+        var movieId = @Model.MovieId;
+        $.ajax({
+            type: "POST",
+            url: "/Movie/ToggleFavorite",
+            data: { movieId: movieId },
+            success: function (response) {
+                if (response.isFavorite) {
+                    $('#favorite-icon').removeClass('far fa-heart').addClass('fas fa-heart');
+                } else {
+                    $('#favorite-icon').removeClass('fas fa-heart').addClass('far fa-heart');
+                }
+            },
+            error: function () {
+            }
+        });
+    }
+            </script>

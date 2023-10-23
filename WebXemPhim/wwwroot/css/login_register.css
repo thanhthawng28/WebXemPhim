@@ -1,0 +1,117 @@
+﻿:root {
+    --background-image: url(https://images5.alphacoders.com/131/thumb-1920-1319528.jpeg);
+    --primary-color: rgb(0, 0, 255);
+    --warning-color: rgb(255, 128, 0);
+    --light-color: rgb(255, 255, 255);
+    --dark-color: rgb(0, 0, 0);
+    --success-color: rgb(0, 255, 0);
+    --danger-color: rgb(255, 0, 0);
+    --background-blur: rgba(0, 0, 0, 0.5);
+    --info-color: rgb(75, 139, 190);
+    --shadow-color: rgba(255, 255, 255, 0.5);
+    --font-size-control: 1rem;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+body {
+    background: var(--background-image);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+}
+
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--background-blur);
+    }
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--background-blur);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px var(--shadow-color);
+    max-width: 400px;
+    width: 90%;
+}
+
+.text-light {
+    color: var(--light-color);
+}
+.text-red {
+    color: var(--danger-color);
+}
+.form-gr {
+    display: flex;
+    flex-direction: column;
+}
+
+    .form-gr label {
+        margin-bottom: 5px;
+    }
+
+.form {
+    background-color: transparent;
+    border: none;
+    color: var(--light-color);
+    border-radius: 0px;
+    border-bottom: 2px solid var(--light-color);
+    margin-bottom: 10px;
+    padding: 10px 0;
+    transition: border-color 0.5s ease;
+    font-size: var(--font-size-control);
+}
+
+    .form:focus {
+        outline: none;
+        border-bottom: 2px solid var(--primary-color);
+    }
+
+.btn {
+    background-color: var(--primary-color);
+    font-size: var(--font-size-control);
+    color: var(--light-color);
+    border: none;
+    width: 100%;
+    border-radius: 5px;
+    margin-top: 15px;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+    .btn:hover {
+        background-color: var(--warning-color);
+    }
+
+a:hover {
+    color: var(--primary-color);
+}
+
+.info-color {
+    color: var(--info-color);
+}
+
+.text-center {
+    text-align: center;
+}
+
+::-ms-reveal {
+    filter: invert(100%);
+}

@@ -1,0 +1,54 @@
+﻿@model List<MovieViewModel>
+@{
+    ViewBag.Title = "Lịch sử xem phim";
+    Layout = "_UserLayout";
+}
+<div class="content-title">
+    <h2>Lịch sử xem phim</h2>
+</div>
+<section class="movie-list" id="movies-container">
+@foreach (var movie in Model)
+{
+    <div class="movie-card">
+        <div class="image-title">
+            <a href="@Url.Action("WatchMovie", "Movie", new { id = movie.MovieId })">
+                <img src="@movie.ImageLink" alt="@movie.Title">
+            </a>
+            <p class="movie-title">
+                <a href="@Url.Action("WatchMovie", "Movie", new { id = movie.MovieId })">
+                    @movie.Title
+                </a>
+            </p>
+
+        </div>
+        <div class="left">
+            <p class="view-favorite"><i class="fas fa-eye"></i> @movie.ViewCount</p>;
+            <p class="view-favorite"><i class="fas fa-solid fa-heart"></i> @movie.LikeCount</p>
+        </div>
+        <div class="center"><p class="view-time">@movie.TimeView</p></div>
+        @{
+            double avgRating = movie.AvgRating;
+            int fullStars = (int)avgRating;
+            bool halfStar = avgRating - fullStars >= 0.5;
+        }
+
+        <div class="star-rating center">
+            @for (int i = 1; i <= 5; i++)
+            {
+                @if (i <= fullStars)
+                {
+                    <i class="fas fa-star"></i>
+                }
+                else if (i - 0.5 <= avgRating)
+                {
+                    <i class="fas fa-star-half-alt"></i>
+                }
+                else
+                {
+                    <i class="far fa-star"></i>
+                }
+            }
+        </div>
+    </div>
+}
+<</section>

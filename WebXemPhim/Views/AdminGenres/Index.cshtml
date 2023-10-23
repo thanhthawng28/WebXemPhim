@@ -1,0 +1,48 @@
+﻿@model List<WebXemPhim.Models.Genre>
+
+@{
+    ViewBag.Title = "Danh sách thể loại";
+    Layout = "_AdminLayout";
+}
+
+            <h1>Danh sách Thể loại phim</h1>
+            <button class="button" onclick="location.href='@Url.Action("Create", "AdminGenres")'">
+                <i class="fas fa-plus"></i> Thêm Thể loại phim
+            </button>
+
+            <!-- Genre List Table -->
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tên Thể loại</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var genre in Model)
+                            {
+                                <tr>
+                                    <td style="text-align:center;">@genre.GenreId</td>
+                        <td style="text-align:center;">@genre.GenreName</td>
+                        <td style="text-align:center;">
+                                        <a href="@Url.Action("Edit", "AdminGenres", new { id = genre.GenreId })"><i class="fas fa-edit icon icon-edit"></i></a>
+                                        <a href="@Url.Action("Delete", "AdminGenres", new { id = genre.GenreId })"><i class="fas fa-trash-alt icon icon-delete"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="3">Không có thể loại phim nào trong cơ sở dữ liệu.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+

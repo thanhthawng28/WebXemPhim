@@ -1,0 +1,78 @@
+﻿@model List<WebXemPhim.Models.Movie>
+@{
+    ViewBag.Title = "Danh sách phim";
+    Layout = "_AdminLayout";
+}
+
+<h1>Danh sách phim</h1>
+<button class="button" onclick="location.href='@Url.Action("Create", "AdminMovies")'">
+    <i class="fas fa-plus"></i> Thêm phim
+</button>
+
+<div class="table-responsive">
+    <table>
+        <thead>
+            <tr>
+                <th class="hidden">Ảnh</th>
+                <th>Tên phim</th>
+                <th>Ngày phát hành</th>
+                <th>Thể loại</th>
+                <th>Quốc gia</th>
+                <th>Đạo diễn</th>
+                <th class="hidden">Diễn viên</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var movie in Model)
+                {
+                    <tr>
+                        <td class="center hidden"><img src="@movie.ImageLink" style="max-width: 100px; max-height: 50px;"></td>
+                        <td>@movie.Title</td>
+                        <td class="center">@(movie.ReleaseDay?.ToString("dd/MM/yyyy"))</td>
+
+                        <td class="center"> @movie.Genre.GenreName</td>
+                        <td class="center"> @movie.CountryName</td>
+
+                        <td> @movie.DirectorName</td>
+
+                        <td class="hidden">
+                            @if (movie.MovieActors != null && movie.MovieActors.Count > 0)
+                            {
+                                @for (var i = 0; i < movie.MovieActors.Count; i++)
+                                {
+                                    <a>@movie.MovieActors.ElementAt(i).ActorName</a>
+                                    @if (i < movie.MovieActors.Count - 1)
+                                    {
+                                        <span>,</span>
+                                    }
+                                }
+                            }
+                        </td>
+
+
+
+
+                        <td>
+                            @(movie.MovieStatus == true ? "Hiện" : "Ẩn")
+                        </td>
+
+                        <td>
+                            <a href="@Url.Action("Edit", "AdminMovies", new { id = movie.MovieId })"><i class="fas fa-edit icon icon-edit"></i></a>
+                            <a href="@Url.Action("Delete", "AdminMovies", new { id = movie.MovieId })"><i class="fas fa-trash-alt icon icon-delete"></i></a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="3">Không có thể loại phim nào trong cơ sở dữ liệu.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

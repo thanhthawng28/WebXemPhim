@@ -1,0 +1,36 @@
+﻿@model WebXemPhim.Models.User
+@{
+    ViewBag.Title = "Đăng nhập";
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Xem Phim - Đăng nhập</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="/css/login_register.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center text-light">Đăng nhập</h1>
+        <br><br>
+        <form asp-controller="Users" asp-action="Login" method="post">
+            @Html.AntiForgeryToken()
+            <div class="form-gr text-light">
+                <label for="UserName"><i class="fas fa-user text-light"></i> Tên đăng nhập</label>
+                <input type="text" id="UserName" name="UserName" class="form" required>
+            </div>
+            <div class="form-gr text-light">
+                <label for="UserPassword"><i class="fas fa-solid fa-lock text-white"></i> Mật khẩu</label>
+                <input type="password" id="UserPassword" name="UserPassword" class="form" required>
+            </div>
+            <button type="submit" class="btn">Đăng nhập</button>
+        </form>
+            @Html.ValidationSummary(false, "", new { @class = "text-light" })
+        <div class="text-center">
+            <p class="text-light">Bạn chưa có tài khoản? <a href="/Users/Register" class="info-color">Tạo tài khoản</a></p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+﻿
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - WebXemPhim</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebXemPhim.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="center">
+                <nav>
+                    <ul class="navigation">
+                        <li class="main-category"><a style="text-decoration: none;" href="@Url.Action("Index", "Movie")">Trang chủ</a></li>
+                        <li class="main-category">
+                            <a style="text-decoration: none;" href="javascript:void(0);">Thể loại <i class="fas fa-solid fa-caret-down"></i></a>
+                            <ul class="sub-categories">
+                                <li><a style="text-decoration: none;" href="@Url.Action("Index", "Movie")"><i class="fas fa-solid fa-caret-right"></i> Tất cả</a></li>
+                                @foreach (var genre in ViewBag.Genres)
+                                {
+                                    <li>
+                                        <i class="fas fa-solid fa-caret-right"></i>
+                                        <a style="text-decoration: none;" href="@Url.Action("MoviesByGenre", "Movie", new { genreId = genre.Value })">
+                                            @genre.Text
+                                        </a>
+                                    </li>
+                                }
+
+                            </ul>
+                        </li>
+                </nav>
+
+            </div>
+            <form method="get" action="@Url.Action("Search", "Movie")" class="search-bar">
+                <div class="group-search-bar">
+                    <input type="text" class="search-input" id="search" name="searchQuery" placeholder="Nhập nội dung cần tìm" onkeyup="searchOnEnter(event)">
+                    <button class="search-btn" type="submit"><i class="fas fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </form>
+            <div class="icon-bar">
+                <a style="text-decoration: none;" class="icon" href="@Url.Action("HistoryMovies", "Movie")"><i class="fas fa-solid fa-clock-rotate-left"></i></a>
+                <a style="text-decoration: none;" class="icon" href="@Url.Action("FavoriteMovies", "Movie")"><i class="fas fa-heart"></i></a>
+                <a style="text-decoration: none;" class="icon" href="@Url.Action("Logout", "Users")"><i class="fas fa-sign-out-alt"></i></a>
+              
+            </div>
+    </header>
+    <main>
+            @RenderBody()
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-social">
+                <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2023 Bản quyền thuộc về .
+            </div>
+        </div>
+    </footer>
+    <script src="~/js/main.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

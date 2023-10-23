@@ -1,0 +1,42 @@
+﻿@model List<MovieStatisticsModel>
+@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "_AdminLayout";
+}
+            <h1>Trang chủ</h1>
+
+            <table class="table-custom">
+                <thead>
+                    <tr>
+                        <th>Thể loại</th>
+                        <th>Số lượng phim</th>
+                        <th>Số lượt xem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var genreMovie in Model)
+                    {
+                        <tr>
+                            <td class="center">@genreMovie.GenreName</td>
+                            <td class="center">@genreMovie.MovieCount</td>
+                            <td>
+                                <table class="inner-table">
+                                    <thead>
+                                       
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var movieView in genreMovie.MovieViews)
+                                        {
+                                            <tr>
+                                                <td>@movieView.Title</td>
+                                                <td class="center">@movieView.ViewCount</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+    

@@ -1,0 +1,28 @@
+﻿@model WebXemPhim.Models.Genre
+@{
+    ViewBag.Title = "Thêm thể loại";
+    Layout = "_AdminLayout";
+}
+
+            <h1>Thêm Thể loại phim</h1>
+
+            <!-- Form thêm thể loại phim -->
+            <div class="form-container">
+                <form asp-action="Create">
+                    <div class="form-gr">
+                        <label asp-for="GenreName">Tên thể loại</label>
+                        <input asp-for="GenreName" class="form" />
+                        <span asp-validation-for="GenreName" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="button">
+                        <i class="fas fa-save"></i> Lưu
+                    </button>
+                    <a asp-controller="AdminGenres" asp-action="Index" class="button">
+                        <i class="fas fa-arrow-left"></i> Trở về
+                    </a>
+                </form>
+            </div>
+      
+
+
+

@@ -1,0 +1,96 @@
+﻿@model WebXemPhim.Models.Movie
+
+@{
+    ViewBag.Title = "Thêm phim";
+    Layout = "_AdminLayout";
+}
+
+<h1>Thêm phim</h1>
+
+<div class="form-container">
+    @using (Html.BeginForm("Create", "AdminMovies", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, "Tiêu đề", new { @class = "control-label" })
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form", required = "required" } })
+            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Content, "Nội dung", new { @class = "control-label" })
+            @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ReleaseDay, "Ngày phát hành", new { @class = "control-label" })
+            @Html.EditorFor(model => model.ReleaseDay, new { htmlAttributes = new { @class = "form", type = "date", required = "required" } })
+            @Html.ValidationMessageFor(model => model.ReleaseDay, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DirectorName, "Đạo diễn", new { @class = "control-label" })
+            @Html.EditorFor(model => model.DirectorName, new { htmlAttributes = new { @class = "form", required = "required" } })
+            @Html.ValidationMessageFor(model => model.DirectorName, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CountryName, "Quốc gia", new { @class = "control-label" })
+            @Html.EditorFor(model => model.CountryName, new { htmlAttributes = new { @class = "form", required = "required" } })
+            @Html.ValidationMessageFor(model => model.CountryName, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GenreId, "Thể loại", new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.GenreId, (IEnumerable<SelectListItem>)ViewData["GenreList"], "Chọn thể loại", new { @class = "form", required = "required" })
+            @Html.ValidationMessageFor(model => model.GenreId, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <input type="hidden" id="ActorList" name="ActorList[]">
+            <label for="actor">Diễn viên:</label>
+            <input type="text" id="actor" name="actor">
+            <button type="button" class="button" onclick="addActor()">Thêm</button>
+        </div>
+        <ul id="actorListShow" class="selected-actors-list"></ul>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImageLink, "Hình ảnh", new { @class = "control-label" })
+            @Html.EditorFor(model => model.ImageLink, new { htmlAttributes = new { @class = "form", id = "image_link", oninput = "displayImage()" } })
+            @Html.ValidationMessageFor(model => model.ImageLink, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="image-container">
+            <img id="image_display" src="" alt="Hình ảnh" />
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Directory, "Video URL", new { @class = "control-label" })
+            @Html.EditorFor(model => model.Directory, new { htmlAttributes = new { @class = "form", id = "directory", oninput = "updateVideo()" } })
+            @Html.ValidationMessageFor(model => model.Directory, "", new { @class = "text-danger" })
+        </div>
+
+        <div>
+            <iframe id="video_frame" src="" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MovieStatus, "Trạng thái phim", new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.MovieStatus, new SelectList(new[]
+        {
+        new { Value = true, Text = "Hiện" },
+        new { Value = false, Text = "Ẩn" },
+        }, "Value", "Text"), "Chọn trạng thái", new { @class = "form-control" , required = "required"})
+        </div>
+
+
+        <div class="form-group">
+            <button type="submit" class="button">
+                <i class="fas fa-save"></i> Lưu
+            </button>
+            @Html.ActionLink("Trở về", "Index", "AdminMovies", null, new { @class = "button" })
+        </div>
+    }
+</div>

@@ -1,0 +1,322 @@
+﻿/* Defined CSS Variables */
+:root {
+    --white-color: rgb(255, 255, 255);
+    --black-color: rgb(0, 0, 0);
+    --gray-color: rgb(128, 128, 128);
+    --light-gray-color: rgb(211, 211, 211);
+    --dark-color: rgb(20, 20, 20);
+    --violet-color: rgb(238, 130, 238);
+    --indigo-color: rgb(75, 0, 130);
+    --blue-color: rgb(0, 0, 255);
+    --green-color: rgb(0, 128, 0);
+    --yellow-color: rgb(255, 255, 0);
+    --orange-color: rgb(255, 165, 0);
+    --red-color: rgb(255, 0, 0);
+    --background-blur-color: rgba(0, 0, 0, 0.3);
+    --form-color: rgba(0, 0, 0, 0.5);
+    --shadow-color: rgba(255, 255, 255, 0.5);
+    --search-color: rgba(255, 255, 255, 0.2);
+    --search-focus-color: rgba(255, 255, 255, 0.3);
+    --sidebar-width: 200px;
+    --font-size-medium: 16px;
+    --font-size-small: 14px;
+    --button-padding: 10px 20px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--white-color);
+}
+
+.container-custom {
+    display: flex;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    height: 100vh;
+    width: var(--sidebar-width);
+    background-color: var(--blue-color);
+    color: var(--white-color);
+    position: fixed;
+    overflow-y: auto;
+    transform: translateX(0);
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+    .sidebar.active {
+        transform: translateX(-250px);
+    }
+
+    .sidebar a {
+        padding: 20px;
+        padding-left: 20px;
+        text-decoration: none;
+        width: var(--sidebar-width);
+        font-size: 18px;
+        color: var(--white-color);
+        display: block;
+        transition: background-color 0.3s;
+    }
+
+        .sidebar a:hover {
+            color: var(--green-color);
+        }
+
+.content {
+    flex: 1;
+    padding: 15px;
+}
+
+.image-container {
+    text-align: center; /* Để căn giữa theo chiều ngang */
+    display: flex;
+    justify-content: center; /* Để căn giữa theo chiều ngang */
+    align-items: center; /* Để căn giữa theo chiều dọc */
+}
+
+#image_display {
+    max-width: 80%;
+    max-height: 300px;
+}
+
+#main-content {
+    margin-left: 200px;
+    margin-top: 200px;
+}
+
+#menu-toggle {
+    font-size: 30px;
+    cursor: pointer;
+    color: var(--blue-color);
+    z-index: 2;
+}
+
+    #menu-toggle:hover {
+        color: var(--green-color);
+    }
+
+h1 {
+    color: var(--blue-color);
+    margin: 20px 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    background-color: var(--light-gray-color);
+}
+
+th,
+td {
+    padding: 10px 0 10px 10px;
+    text-align: left;
+}
+
+
+th {
+    background-color: var(--blue-color);
+    text-align: center;
+    color: var(--white-color);
+}
+td {
+    border-bottom: 1px solid var(--black-color);
+}
+tr:last-child td {
+    border-bottom: none;
+}
+c
+.center {
+    text-align: center;
+}
+
+.button {
+    padding: var(--button-padding);
+    margin: 10px 10px 10px 0;
+    background-color: var(--green-color);
+    color: var(--white-color);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-weight: bold;
+}
+
+    .button:hover {
+        background-color: var(--orange-color);
+    }
+
+.icon {
+    font-size: 15px;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: color 0.3s;
+}
+/* Icon Styles */
+.icon-delete {
+    color: var(--red-color);
+}
+
+.icon:hover {
+    transform: scale(1.05);
+}
+
+.icon-edit {
+    color: var(--blue-color);
+}
+
+label {
+    font-weight: bold;
+    padding: 10px;
+    color: var(--white-color);
+}
+
+input[type="text"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid var(--gray-color);
+    border-radius: 5px;
+}
+
+input:focus, select:focus {
+    outline: none;
+}
+
+
+.form-container {
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: var(--blue-color);
+}
+
+.selected-actors-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+    .selected-actors-list li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5px;
+        background-color: var(--gray-color);
+        padding: 10px;
+    }
+
+        .selected-actors-list li .actor-name {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+
+        .selected-actors-list li .remove-actor {
+            cursor: pointer;
+            color: var(--red-color);
+        }
+
+#video_frame {
+    display: block;
+    margin: 10px auto; /* Canh giữa theo chiều ngang */
+    max-width: 90%; /* Chiều rộng */
+    width: 560px;
+    height: 315px; /* Chiều cao */
+    border: 2px solid #ccc; /* Viền */
+}
+
+.button-center {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    /* Adjust the font size for form elements */
+    input[type="text"],
+    input[type="date"],
+    select {
+        font-size: var(--font-size-small);
+    }
+
+    /* Reduce padding for labels */
+    label {
+        margin-bottom: 5px;
+    }
+
+    .container-custom {
+        flex-direction: column; /* Chuyển sang layout dọc */
+    }
+
+    /* Điều chỉnh các thuộc tính cho sidebar */
+    .sidebar {
+        display: inline-block;
+        width: 100%; /* Sử dụng toàn bộ chiều rộng của màn hình */
+        height: auto; /* Chiều cao tự động */
+        transform: translateY(0); /* Giữ sidebar ở vị trí ban đầu */
+    }
+
+    #video_frame {
+        display: block;
+        margin: 10px auto; /* Canh giữa theo chiều ngang */
+        max-width: 90%; /* Chiều rộng */
+        height: auto; /* Chiều cao */
+        border: 2px solid #ccc; /* Viền */
+    }
+
+    #main-content {
+        margin-left: 0;
+        margin-top: 200px;
+    }
+    /* Điều chỉnh các thuộc tính cho nút toggle */
+    #menu-toggle {
+        position: fixed; /* Đặt vị trí tuyệt đối để hiển thị trên cùng */
+        right: 10px; /* Đặt khoảng cách từ nút toggle đến cạnh phải */
+        top: 10px; /* Đặt khoảng cách từ nút toggle đến phía trên */
+    }
+    /* Đảm bảo tất cả các mục liên kết nằm trên cùng một dòng */
+    .sidebar a {
+        display: inline-block; /* Hiển thị mỗi mục liên kết trên cùng một dòng */
+        width: 180px;
+    }
+
+
+    .sidebar.active {
+        transform: translateY(-200px);
+    }
+
+    table {
+        font-size: var(--font-size-small); /* Điều chỉnh kích thước chữ cho bảng khi màn hình nhỏ hơn 768px */
+    }
+
+    th,
+    td {
+        padding: 5px;
+        text-align: center;
+        font-size: var(--font-size-small); /* Điều chỉnh kích thước chữ cho ô trong bảng */
+    }
+
+    .hidden {
+        display: none;
+    }
+}
